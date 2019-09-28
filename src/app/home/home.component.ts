@@ -64,13 +64,12 @@ export class HomeComponent {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.success_addpassenger = data;
+                    this.success_addpassenger = data.message;
                     this.error_addpassenger = '';
-                    this.loading_addpassenger = false;
-                },
-                error => {
-                    this.error_addpassenger = error;
-                    this.success_addpassenger = '';
+                    if (data.status=="KO") {
+                        this.success_addpassenger = '';
+                        this.error_addpassenger = data.message;
+                    }
                     this.loading_addpassenger = false;
                 });
     }
