@@ -7,17 +7,17 @@ const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
       'Authorization': 'my-auth-token'
-    })
+    })};
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient) {        
     }
 
     getManifest(flight: string) {
-        return this.http.post<any>(`${environment.apiUrl}/api/manifest/getmanifest`, { flight })
+        return this.http.get<any>(`${environment.apiUrl}/api/manifest/`+flight)
             .pipe(map(passengers => {
-                return passengers;
+                return JSON.stringify(passengers);
             }));
     }
 }

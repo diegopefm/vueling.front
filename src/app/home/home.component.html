@@ -1,26 +1,70 @@
 <div class="card mt-4">
-  <h4 class="card-header">You're logged in with Angular 8 & JWT!!</h4>
-  <!-- <div class="card-body">
+    <h4 class="card-header">Vueling Api success - You're logged in with Angular 8 & JWT!!</h4>
+    <!-- <div class="card-body">
       <h6>Users from secure api end point</h6>
       <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
       <ul *ngIf="users">
           <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
       </ul>
   </div> -->
-  <div class="card-body">
-      <form [formGroup]="apiRequestsForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-              <label for="flight">Flight</label>
-              <input type="text" formControlName="flight" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.flight.errors }" />
-              <div *ngIf="f.flight.errors" class="invalid-feedback">
-                  <div *ngIf="f.flight.errors.required">Flight is required</div>
-              </div>
-          </div>
-          <button [disabled]="loading" class="btn btn-primary">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-              Get Manifest
-          </button>
-          <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-      </form>    
-  </div>
+    <div class="card-body">
+        <form [formGroup]="apiRequestsForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="flight">Flight</label>
+                <input type="text" formControlName="flight" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.flight.errors }" />
+                <div *ngIf="f.flight.errors" class="invalid-feedback">
+                    <div *ngIf="f.flight.errors.required">Flight is required</div>
+                </div>
+            </div>
+            <button [disabled]="loading" class="btn btn-primary" (click)="getManifest()">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Get Manifest
+            </button>
+            <div *ngIf="error_getmanifest" class="alert alert-danger mt-3 mb-0">{{error_getmanifest}}</div>
+            <div *ngIf="success_getmanifest" class="alert alert-success mt-3 mb-0">{{success_getmanifest}}</div>
+
+            <hr/>
+
+            <div class="form-group">
+                <label for="passenger_flight">Flight</label>
+                <input type="text" formControlName="passenger_flight" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.passenger_flight.errors }" />
+                <div *ngIf="f.passenger_flight.errors" class="invalid-feedback">
+                    <div *ngIf="f.passenger_flight.errors.required">Flight is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="passenger_name">Passenger Name</label>
+                <input type="text" formControlName="passenger_name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.passenger_name.errors }" />
+                <div *ngIf="f.passenger_name.errors" class="invalid-feedback">
+                    <div *ngIf="f.passenger_name.errors.required">Passenger name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="passenger_surname">Passenger Surame</label>
+                <input type="text" formControlName="passenger_surname" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.passenger_surname.errors }" />
+                <div *ngIf="f.passenger_surname.errors" class="invalid-feedback">
+                    <div *ngIf="f.passenger_surname.errors.required">Passenger surname is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="passenger_seat">Passenger seat</label>
+                <input type="text" formControlName="passenger_seat" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.passenger_seat.errors }" />
+                <div *ngIf="f.passenger_seat.errors" class="invalid-feedback">
+                    <div *ngIf="f.passenger_seat.errors.required">Passenger seat is required</div>
+                </div>
+            </div>
+
+            <button [disabled]="loading" class="btn btn-primary" (click)="addPassenger()">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Add Passenger
+            </button>
+            <div *ngIf="error_addpassenger" class="alert alert-danger mt-3 mb-0">{{error_addpassenger}}</div>
+            <div *ngIf="success_addpassenger" class="alert alert-success mt-3 mb-0">{{success_addpassenger}}</div>
+        </form>
+    </div>
 </div>
