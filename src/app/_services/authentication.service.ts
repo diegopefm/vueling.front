@@ -31,10 +31,11 @@ export class AuthenticationService {
     login(username: string, password: string) {
         return this.http.post<any>(`${environment.apiUrl}/api/login/authenticate`, { username, password })
             .pipe(map(user => {
-                let oUser = new User();
+                let oUser = new User();                
                 oUser.username = user['name'];
                 oUser.token = user['token'];
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('currentUser', JSON.stringify(oUser));
+                let token = 'Bearer ' + JSON.parse(localStorage.getItem('currentUser')).token;
                 this.currentUserSubject.next(user);
                 return user;
             }));
