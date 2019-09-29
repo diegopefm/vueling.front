@@ -35,7 +35,6 @@ export class AuthenticationService {
                 oUser.username = user['name'];
                 oUser.token = user['token'];
                 localStorage.setItem('currentUser', JSON.stringify(oUser));
-                let token = 'Bearer ' + JSON.parse(localStorage.getItem('currentUser')).token;
                 this.currentUserSubject.next(user);
                 return user;
             }));
