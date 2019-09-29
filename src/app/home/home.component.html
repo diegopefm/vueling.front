@@ -1,12 +1,5 @@
 <div class="card mt-4">
     <h4 class="card-header">Vueling Api success - You're logged in with Angular 8 & JWT!!</h4>
-    <!-- <div class="card-body">
-      <h6>Users from secure api end point</h6>
-      <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-      <ul *ngIf="users">
-          <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-      </ul>
-  </div> -->
     <div class="card-body">
         <form [formGroup]="apiRequestsForm">
             <div class="form-group">
@@ -17,8 +10,8 @@
                     <div *ngIf="f.flight.errors.required">Flight is required</div>
                 </div>
             </div>
-            <button [disabled]="loading" class="btn btn-primary" (click)="getManifest()">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <button [disabled]="loading_getmanifest" class="btn btn-primary" (click)="getManifest()">
+                <span *ngIf="loading_getmanifest" class="spinner-border spinner-border-sm mr-1"></span>
                 Get Manifest
             </button>
             <div *ngIf="error_getmanifest" class="alert alert-danger mt-3 mb-0">{{error_getmanifest}}</div>
@@ -59,12 +52,58 @@
                 </div>
             </div>
 
-            <button [disabled]="loading" class="btn btn-primary" (click)="addPassenger()">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <button [disabled]="loading_addpassenger" class="btn btn-primary" (click)="addPassenger()">
+                <span *ngIf="loading_addpassenger" class="spinner-border spinner-border-sm mr-1"></span>
                 Add Passenger
             </button>
             <div *ngIf="error_addpassenger" class="alert alert-danger mt-3 mb-0">{{error_addpassenger}}</div>
             <div *ngIf="success_addpassenger" class="alert alert-success mt-3 mb-0">{{success_addpassenger}}</div>
+
+            <hr/>
+
+            <h2>Api Client</h2>
+
+            <div class="form-group">
+                <label for="passenger_flight_client">Flight</label>
+                <input type="text" formControlName="passenger_flight_client" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.passenger_flight_client.errors }" />
+                <div *ngIf="f.passenger_flight_client.errors" class="invalid-feedback">
+                    <div *ngIf="f.passenger_flight_client.errors.required">Flight is required</div>
+                </div>
+            </div>
+            <button [disabled]="loading_updatemanifest" class="btn btn-primary" (click)="updateManifest()">
+                <span *ngIf="loading_updatemanifest" class="spinner-border spinner-border-sm mr-1"></span>
+                Update Manifest
+            </button>
+            <div *ngIf="error_updatemanifest" class="alert alert-danger mt-3 mb-0">{{error_updatemanifest}}</div>
+            <div *ngIf="success_updatemanifest" class="alert alert-success mt-3 mb-0">{{success_updatemanifest}}</div>
+
+            <hr/>
+
+            <h3>Search passenger</h3>
+            
+            <div class="form-group">
+                <label for="passenger_name_client">Name</label>
+                <input type="text" formControlName="passenger_name_client" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.passenger_name_client.errors }" />
+            </div>
+            <div class="form-group">
+                <label for="passenger_surname_client">Surname</label>
+                <input type="text" formControlName="passenger_surname_client" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.passenger_surname_client.errors }" />
+            </div>
+            <div class="form-group">
+                <label for="passenger_seat_client">Name</label>
+                <input type="text" formControlName="passenger_seat_client" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.passenger_seat_client.errors }" />
+            </div>
+
+            <button [disabled]="loading_searchpassenger" class="btn btn-primary" (click)="searchPassenger()">
+                <span *ngIf="loading_searchpassenger" class="spinner-border spinner-border-sm mr-1"></span>
+                Search
+            </button>
+            <div *ngIf="error_searchpassenger" class="alert alert-danger mt-3 mb-0">{{error_searchpassenger}}</div>
+            <div *ngIf="success_searchpassenger" class="alert alert-success mt-3 mb-0">{{success_searchpassenger}}</div>
         </form>
     </div>
 </div>

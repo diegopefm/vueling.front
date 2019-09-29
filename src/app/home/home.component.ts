@@ -7,13 +7,23 @@ import { Passenger } from '@app/_model/passenger';
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
     apiRequestsForm: FormGroup;
-    loading_getmanifest = false;
-    loading_addpassenger = false;
     submitted = false;
+
+    loading_getmanifest = false;
     error_getmanifest = '';
     success_getmanifest = '';
+    
+    loading_addpassenger = false;
     error_addpassenger = '';
     success_addpassenger = '';
+    
+    loading_updatemanifest = false;
+    error_updatemanifest = '';
+    success_updatemanifest = '';
+
+    loading_searchpassenger = false;
+    error_searchpassenger = '';
+    success_searchpassenger = '';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -27,7 +37,11 @@ export class HomeComponent {
             passenger_name: ['', Validators.required],
             passenger_surname: ['', Validators.required],
             passenger_seat: ['', Validators.required],
-            passenger_flight: ['', Validators.required]
+            passenger_flight: ['', Validators.required],
+            passenger_flight_client: ['', Validators.required],
+            passenger_name_client: [''],
+            passenger_surname_client: [''],
+            passenger_seat_client: ['']
         });
     }
 
@@ -71,6 +85,49 @@ export class HomeComponent {
                         this.error_addpassenger = data.message;
                     }
                     this.loading_addpassenger = false;
+                },
+                error => {
+                    this.success_addpassenger = '';
+                    this.error_addpassenger = error.message;
+                    this.loading_addpassenger = false;
+                });
+    }
+
+    updateManifest() {
+
+        this.loading_updatemanifest = true;
+        this.apiService.updateManifest(this.f.passenger_flight_client.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.success_updatemanifest = data;
+                    this.error_updatemanifest = '';
+                    this.loading_updatemanifest = false;
+                },
+                error => {
+                    this.error_updatemanifest = error;
+                    this.success_updatemanifest = '';
+                    this.loading_updatemanifest = false;
+                });
+    }
+
+    searchPassenger() {
+
+        this.loading_searchpassenger = true;
+        this.apiService.searchPassenger(this.f.passenger_name_client.value, 
+                                            this.f.passenger_surname_client.value, 
+                                            this.f.passenger_seat_client.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.success_searchpassenger = data;
+                    this.error_searchpassenger = '';
+                    this.loading_searchpassenger = false;
+                },
+                error => {
+                    this.error_searchpassenger = error;
+                    this.success_searchpassenger = '';
+                    this.loading_searchpassenger = false;
                 });
     }
 }
