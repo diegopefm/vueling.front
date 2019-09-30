@@ -21,4 +21,6 @@ INSTALL AND RUN THE APPLICATION:
 
 5) Download and install modules: npm install
 
-6) Launch app: ng serve => Open Chrome with http://localhost:4200
+6) Update Node to latest version (front is developed with Angular 8 so, if not latest node version is installed ng serve will most likely fail): https://nodejs.org/es/download/
+
+7) Launch app: ng serve => Open Chrome with http://localhost:4200
