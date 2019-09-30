@@ -1,9 +1,9 @@
 # vueling.front
 Vueling candidate test front part.
 
-This test includes two projects, a DotNet Core C# Api backend and an Angular 8 frontend. This is the frontend part.
+This test includes three projects, two DotNet Core C# Apis (backend part) and an Angular 8 frontend. This is the second api backend part.
 
-Both projects are stored individually on two separate GitHub repositories for "separation of concerns".
+All projects are stored individually on three separate GitHub repositories for "separation of concerns".
 
 Frontend is developed using Angular 8 and vscode and initially created using Angular-Cli.
 
