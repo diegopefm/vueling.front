@@ -21,4 +21,4 @@ INSTALL AND RUN THE APPLICATION:
 
 5) Download and install modules: npm install
 
-6) Launch app: http://localhost:4200
+6) Launch app: ng serve => Open Chrome with http://localhost:4200
