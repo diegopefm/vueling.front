@@ -4,12 +4,13 @@ import { map } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
 import { Passenger } from '@app/_model/passenger';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
     headers: any;
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, private router: Router, private auth: AuthenticationService) {
         
     }
 
@@ -21,11 +22,11 @@ export class ApiService {
     }
 
     addPassenger(name: string, surname: string, seat: string, flight: string) {
-
-        let url = `${environment.apiUrl}/api/manifest/search/`+name+`/`+surname+`/`+seat;
-
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        //if (currentUser==null) this.router.navigate(['/login']); //=> TODO: Redirect to login
+        if (currentUser==null) {
+            this.auth.logout();
+            this.router.navigate(['/login']);
+        };
 
         this.headers = new HttpHeaders({
             'Authorization': 'Bearer ' + currentUser.token,
@@ -56,4 +57,6 @@ export class ApiService {
                 return JSON.stringify(passengers);
             }));
     }
+
+    
 }
